@@ -5,7 +5,7 @@ type puppyCardProps = {
   puppy: IPuppy
 }
 
-export const puppyCard = ( { puppy } : puppyCardProps) => {
+export const PuppyCard = ( { puppy } : puppyCardProps) => {
   return (
     <div>{puppy.name} {puppy.breed} p{puppy.birthdate}</div>
   )
