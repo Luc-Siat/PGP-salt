@@ -2,6 +2,7 @@ import { ContextType, useContext } from "react"
 import { PuppiesContextType } from "../interfaces/types";
 import { PuppiesContext } from "../context/PuppiesContext";
 import { PuppyCard } from "../components/PuppyCard";
+import { AddPuppyForm } from "../components/AddPuppyForm";
 
 
 export const Home = () => {
@@ -9,7 +10,9 @@ export const Home = () => {
 
   return (
     <>
-      { puppies.map(puppy => <PuppyCard puppy={puppy}/> ) }
+      { puppies.map(puppy => <PuppyCard puppy={puppy} key={puppy.id}/> ) }
+
+      < AddPuppyForm />
     </>
   )
 }

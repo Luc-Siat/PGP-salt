@@ -7,6 +7,6 @@ type puppyCardProps = {
 
 export const PuppyCard = ( { puppy } : puppyCardProps) => {
   return (
-    <div>{puppy.name} {puppy.breed} p{puppy.birthdate}</div>
+    <div>{puppy.name} {puppy.breed} {puppy.birthDate.toString()}</div>
   )
 }
