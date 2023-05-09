@@ -1,7 +1,12 @@
-import React from 'react'
+import { IPuppy } from "../interfaces/interfaces"
 
-export const puppyCard = () => {
+
+type puppyCardProps = {
+  puppy: IPuppy
+}
+
+export const puppyCard = ( { puppy } : puppyCardProps) => {
   return (
-    <div></div>
+    <div>{puppy.name} {puppy.breed} p{puppy.birthdate}</div>
   )
 }

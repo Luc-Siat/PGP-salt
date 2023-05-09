@@ -8,7 +8,7 @@ export const Home = () => {
 
   return (
     <>
-      {/* puppies.map */}
+      { puppies.map(puppy => <PuppyCard puppy={puppy}/> ) }
     </>
   )
 }
