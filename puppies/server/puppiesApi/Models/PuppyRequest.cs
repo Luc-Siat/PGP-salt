@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace puppiesApi.Models
 {
-    public class Puppy
+    public class PuppyRequest
     {
-        public int id {get; set;}
         public required string breed {get; set;}
         public required string name {get; set;}
         public DateTime birthDate {get; set;}

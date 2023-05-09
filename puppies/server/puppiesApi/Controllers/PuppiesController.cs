@@ -44,22 +44,54 @@ namespace puppiesApi.Controllers
         return Ok(puppy);
       }
 
-      // [HttpPost]
-      // public Task<ActionResult> PostOne(Puppy puppy)
-      // {
-      //   return Ok();
-      // }
+      [HttpPost]
+      public async Task<ActionResult> PostOne(PuppyRequest puppy)
+      {
+        if ( puppy is null)
+        {
+          return BadRequest();
+        }
 
-      // [HttpPut("id")]
-      // public Task<ActionResult> PutOne(Puppy puppy)
-      // {
-      //   return Ok();
-      // }
+        Puppy puppyToAdd = new Puppy(){
+          name= puppy.name,
+          breed= puppy.breed,
+          birthDate= puppy.birthDate
+        };
 
-      // [HttpDelete("id")]
-      // public Task<ActionResult> DeleteOne()
-      // {
-      //   return Ok();
-      // }
+        var addedPuppy = _context.Puppies.Add(puppyToAdd).Entity;
+
+        await _context.SaveChangesAsync();
+
+        return CreatedAtAction(nameof(GetAll), new {id = addedPuppy.id}, puppy);
+      }
+
+      [HttpPut("id")]
+      public async Task<ActionResult> PutOne(int id, Puppy puppy)
+      {
+        var puppyToUpdate = await _context.Puppies.FindAsync(id);
+
+        if (puppyToUpdate == null)
+        {
+          return NotFound();
+        }
+        puppyToUpdate.name = puppy.name;
+        puppyToUpdate.breed = puppy.breed;
+        puppyToUpdate.birthDate = puppy.birthDate;
+
+        await _context.SaveChangesAsync();
+
+        return Ok();
+      }
+
+      [HttpDelete("id")]
+      public async Task<ActionResult> DeleteOne(int id)
+      {
+        var puppyToDelete = await _context.Puppies.FindAsync(id);
+        if ( puppyToDelete == null)
+        {
+          return NotFound();
+        }
+        return NoContent();
+      }
     }
 }
