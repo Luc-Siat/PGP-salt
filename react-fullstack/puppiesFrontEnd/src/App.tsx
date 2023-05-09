@@ -1,29 +1,17 @@
-import { useState, useContext } from 'react'
-
+import { useEffect, useState } from 'react'
 import './App.css'
 import { Home } from './pages/Home'
-import { createContext } from 'vm'
-import { getEnvironmentData } from 'worker_threads'
+import { IPuppy } from './interfaces/interfaces';
+import { PuppiesContext, PuppiesProvider } from './context/PuppiesContext';
 
 
 function App() {
 
-  const getData = () => {
-
-  }
-
-  useEffect(() => {
-    getData();
-  }, [])
-
-  const PuppiesContext = createContext([]);
-
   return (
-    <>
-      <PuppiesContext.Provider value="">
+
+    <PuppiesProvider>
       <Home />
-      </PuppiesContext.Provider>
-    </>
+    </PuppiesProvider>
   )
 }
 
