@@ -18,6 +18,12 @@ export const PuppiesProvider = ( {children} : PuppiesProviderProps) => {
     setPuppies( prevState => [addedPuppy, ...prevState])
   }
 
+  const editPuppy = async (currentId : number, puppy: Partial<IPuppy>) => {
+    // const updatedPuppy = await putPuppy(puppy);
+    // const updatedPuppies = [updatedPuppy, ...puppies.filter(pup => pup.id !== puppy.id )]
+    // setPuppies( updatedPuppies);
+  }
+
   const getData = async () => {
     setPuppies(await getPuppies());
   }
@@ -27,7 +33,7 @@ export const PuppiesProvider = ( {children} : PuppiesProviderProps) => {
   }, [])
 
   return (
-    <PuppiesContext.Provider value={{puppies, setPuppies, postingPuppy}}>
+    <PuppiesContext.Provider value={{puppies, setPuppies, postingPuppy, editPuppy}}>
       {children}
     </PuppiesContext.Provider >
   )

@@ -1,19 +1,18 @@
-import React, { useContext } from 'react'
 import { Formik, Form, Field} from 'formik'
-import { postPuppy } from '../services/puppyApi'
-import { PuppiesContext } from '../context/PuppiesContext'
-import { PuppiesContextType } from '../interfaces/types'
+import { IPuppy } from '../interfaces/interfaces';
+
+type PuppyFormProps = {
+  func: (puppy : Partial<IPuppy>) => void;
+}
 
 
-export const AddPuppyForm = () => {
-
-  const {puppies, postingPuppy} = useContext(PuppiesContext) as PuppiesContextType;
+export const PuppyForm = ( { func } : PuppyFormProps ) => {
 
   return (
     <Formik
     initialValues={ {name: "", breed: "" , birthdate: new Date() }}
     onSubmit={ (puppy) =>  {
-      postingPuppy(puppy);
+      func(puppy);
     }}>
 
       <Form action="">

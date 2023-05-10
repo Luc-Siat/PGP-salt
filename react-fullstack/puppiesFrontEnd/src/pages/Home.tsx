@@ -2,7 +2,7 @@ import { ContextType, useContext } from "react"
 import { PuppiesContextType } from "../interfaces/types";
 import { PuppiesContext } from "../context/PuppiesContext";
 import { PuppyCard } from "../components/PuppyCard";
-import { AddPuppyForm } from "../components/AddPuppyForm";
+import { AddPuppyForm } from "../components/PuppyForm";
 
 
 export const Home = () => {
