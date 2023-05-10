@@ -16,9 +16,9 @@ export const PuppyForm = ( { func } : PuppyFormProps ) => {
     }}>
 
       <Form action="">
-        <Field name="name" type="text"></Field>
-        <Field name="breed" type="text"></Field>
-        <Field name="birthdate" type="date"></Field>
+        <Field required name="name" type="text"></Field>
+        <Field required name="breed" type="text"></Field>
+        <Field required name="birthdate" type="date"></Field>
         <button type="submit">Submit</button>
       </Form>
     </Formik>

@@ -1,7 +1,9 @@
 import { createContext, useEffect, useState } from "react";
 import { PuppiesContextType } from "../interfaces/types";
 import { IPuppy } from "../interfaces/interfaces";
-import { getPuppies, postPuppy } from "../services/puppyApi";
+import { deletePuppy, getPuppies, postPuppy, putPuppy } from "../services/puppyApi";
+import { stringify } from "querystring";
+import { PuppyCard } from "../components/PuppyCard";
 
 interface PuppiesProviderProps {
   children: React.ReactNode
@@ -18,10 +20,15 @@ export const PuppiesProvider = ( {children} : PuppiesProviderProps) => {
     setPuppies( prevState => [addedPuppy, ...prevState])
   }
 
-  const editPuppy = async (currentId : number, puppy: Partial<IPuppy>) => {
-    // const updatedPuppy = await putPuppy(puppy);
-    // const updatedPuppies = [updatedPuppy, ...puppies.filter(pup => pup.id !== puppy.id )]
-    // setPuppies( updatedPuppies);
+  const editPuppy = async (puppy: IPuppy) => {
+    await putPuppy(puppy);
+    const updatedPuppies = [puppy, ...puppies.filter(pup => pup.id !== puppy.id )];
+    setPuppies(updatedPuppies);
+  }
+
+  const deletingPuppy = async (id : number) => {
+    await deletePuppy(id);
+    setPuppies(puppies.filter(pup => pup.id !== id));
   }
 
   const getData = async () => {
@@ -33,7 +40,7 @@ export const PuppiesProvider = ( {children} : PuppiesProviderProps) => {
   }, [])
 
   return (
-    <PuppiesContext.Provider value={{puppies, setPuppies, postingPuppy, editPuppy}}>
+    <PuppiesContext.Provider value={{puppies, setPuppies, postingPuppy, editPuppy, deletingPuppy}}>
       {children}
     </PuppiesContext.Provider >
   )

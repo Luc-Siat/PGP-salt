@@ -18,3 +18,25 @@ export const postPuppy = async (puppy : Partial<IPuppy>) => {
     })
   return await response.json() as IPuppy;
 }
+
+export const putPuppy = async ( puppy: IPuppy) => {
+  return await fetch(`${puppyApiUrl}/${puppy.id}`,
+  {
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json;charset=UTF-8',
+    },
+    body: JSON.stringify(puppy)
+  });
+}
+
+export const deletePuppy = async (id : number) => {
+  const response =  await fetch(`${puppyApiUrl}/${id}`,
+  {
+    method: 'DELETE',
+    headers: {
+      'content-type': 'application/json;charset=UTF-8',
+    },
+  });
+  console.log(response);
+}

@@ -27,7 +27,7 @@ namespace puppiesApi.Controllers
         return await _context.Puppies.ToListAsync();
       }
 
-      [HttpGet("id")]
+      [HttpGet("{id}")]
       public async Task<ActionResult<Puppy>> GetOne(int id)
       {
         if (_context.Puppies == null)
@@ -65,7 +65,7 @@ namespace puppiesApi.Controllers
         return CreatedAtAction(nameof(GetAll), new {id = addedPuppy.id}, puppy);
       }
 
-      [HttpPut("id")]
+      [HttpPut("{id}")]
       public async Task<ActionResult> PutOne(int id, Puppy puppy)
       {
         var puppyToUpdate = await _context.Puppies.FindAsync(id);
@@ -83,7 +83,7 @@ namespace puppiesApi.Controllers
         return Ok();
       }
 
-      [HttpDelete("id")]
+      [HttpDelete("{id}")]
       public async Task<ActionResult> DeleteOne(int id)
       {
         var puppyToDelete = await _context.Puppies.FindAsync(id);
@@ -91,6 +91,8 @@ namespace puppiesApi.Controllers
         {
           return NotFound();
         }
+        _context.Puppies.Remove(puppyToDelete);
+        await _context.SaveChangesAsync();
         return NoContent();
       }
     }

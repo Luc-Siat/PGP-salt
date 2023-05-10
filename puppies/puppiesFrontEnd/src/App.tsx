@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react'
 import './App.css'
 import { Home } from './pages/Home'
-import { IPuppy } from './interfaces/interfaces';
-import { PuppiesContext, PuppiesProvider } from './context/PuppiesContext';
+import {  PuppiesProvider } from './context/PuppiesContext';
 
 
 function App() {
