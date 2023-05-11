@@ -13,6 +13,6 @@ namespace mockea.Api.Models
         public required int Rating {get; set;}
         public required string Title {get; set;}
         public string? Text {get; set;}
-        public required virtual Product ProductId {get;set;}
+        public required virtual Product Product {get;set;}
     }
 }

@@ -11,5 +11,6 @@ namespace mockea.Api.Models
         [Key]
         public int CategoryId {get; set;}
         public required string Name {get; set;}
+        public virtual List<Product>? Products {get; set; }
     }
 }
