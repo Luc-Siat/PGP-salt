@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "5nBuj6mpPNOtJfksah3EzhJvd4Ema901nx+FqeMrvPnc+6nsfrfDpimYBD+S0xEfcsYD0Hi4OSsrtyu2qn6VtQ==",
+  "dgSpecHash": "5CaQHYhMBXKt1wSjyRjJapjGHIFm17/m8gP/0u09YyEfLPKuOHYenPfG7FZIbNBlNSJwJwmfGQgjD70JzyBEGg==",
   "success": true,
   "projectFilePath": "/home/luc/pgp/mockea/server/mockea.Api/mockea.Api.csproj",
   "expectedPackageFiles": [
@@ -39,6 +39,7 @@
     "/home/luc/.nuget/packages/microsoft.entityframeworkcore.design/7.0.5/microsoft.entityframeworkcore.design.7.0.5.nupkg.sha512",
     "/home/luc/.nuget/packages/microsoft.entityframeworkcore.relational/7.0.5/microsoft.entityframeworkcore.relational.7.0.5.nupkg.sha512",
     "/home/luc/.nuget/packages/microsoft.entityframeworkcore.sqlserver/7.0.5/microsoft.entityframeworkcore.sqlserver.7.0.5.nupkg.sha512",
+    "/home/luc/.nuget/packages/microsoft.entityframeworkcore.tools/7.0.5/microsoft.entityframeworkcore.tools.7.0.5.nupkg.sha512",
     "/home/luc/.nuget/packages/microsoft.extensions.apidescription.server/6.0.5/microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "/home/luc/.nuget/packages/microsoft.extensions.caching.abstractions/7.0.0/microsoft.extensions.caching.abstractions.7.0.0.nupkg.sha512",
     "/home/luc/.nuget/packages/microsoft.extensions.caching.memory/7.0.0/microsoft.extensions.caching.memory.7.0.0.nupkg.sha512",
