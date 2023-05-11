@@ -83,12 +83,13 @@ namespace mockea.Api.Controllers
         // POST: api/Product
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
+        public async Task<ActionResult<Product>> PostProduct(ProductRequest request)
         {
           if (_context.Products == null)
           {
               return Problem("Entity set 'MockeaContext.Product'  is null.");
           }
+            var product = RequestToPlainProduct(request);
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
@@ -118,6 +119,27 @@ namespace mockea.Api.Controllers
         private bool ProductExists(int id)
         {
             return (_context.Products?.Any(e => e.ProductId == id)).GetValueOrDefault();
+        }
+
+        // private ProductResponse ToResponse(Product product)
+        // {
+        //   return new ProductResponse(){
+        //     Name
+        //   }
+        // }
+
+        private Product RequestToPlainProduct(ProductRequest request)
+        {
+          return new Product(){
+            Care= request.Care,
+            Color= request.Color,
+            Category= _context.Categories.First(category => category.CategoryId == request.CategoryId),
+            Description= request.Description,
+            Dimensions= request.Dimensions,
+            Material= request.Material,
+            Name= request.Name,
+            Price= request.Price
+          };
         }
     }
 }

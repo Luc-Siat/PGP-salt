@@ -22,18 +22,18 @@ namespace mockea.Api.Controllers
 
         // GET: api/Categories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategory()
+        public async Task<ActionResult<IEnumerable<CategoryResponse>>> GetCategory()
         {
           if (_context.Categories == null)
           {
               return NotFound();
           }
-            return await _context.Categories.ToListAsync();
+            return (await _context.Categories.ToListAsync()).Select(category => ToResponse(category)).ToList();
         }
 
         // GET: api/Categories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        public async Task<ActionResult<CategoryResponse>> GetCategory(int id)
         {
           if (_context.Categories == null)
           {
@@ -46,20 +46,17 @@ namespace mockea.Api.Controllers
                 return NotFound();
             }
 
-            return category;
+            return ToResponse(category);
         }
 
         // PUT: api/Categories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, Category category)
+        public async Task<IActionResult> PutCategory(int id, CategoryRequest request)
         {
-            if (id != category.CategoryId)
-            {
-                return BadRequest();
-            }
 
-            _context.Entry(category).State = EntityState.Modified;
+
+            _context.Entry(RequestToPlainCategory(request)).State = EntityState.Modified;
 
             try
             {
@@ -83,13 +80,14 @@ namespace mockea.Api.Controllers
         // POST: api/Categories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(Category category)
+        public async Task<ActionResult<Category>> PostCategory(CategoryRequest request)
         {
           if (_context.Categories == null)
           {
               return Problem("Entity set 'MockeaContext.Category'  is null.");
           }
-            _context.Categories.Add(category);
+            var category = RequestToPlainCategory(request);
+            var adddedCategory = _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetCategory", new { id = category.CategoryId }, category);
@@ -118,6 +116,22 @@ namespace mockea.Api.Controllers
         private bool CategoryExists(int id)
         {
             return (_context.Categories?.Any(e => e.CategoryId == id)).GetValueOrDefault();
+        }
+
+        private CategoryResponse ToResponse(Category category)
+        {
+          return new CategoryResponse(){
+            CategoryId= category.CategoryId,
+            Name= category.Name,
+            ProductIds= category.Products?.Select(product => product.ProductId).ToList()
+          };
+        }
+
+        private Category RequestToPlainCategory(CategoryRequest request)
+        {
+          return new Category(){
+            Name = request.Name
+          };
         }
     }
 }
